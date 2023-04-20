@@ -13,7 +13,7 @@ This project is the front-end part of TanGo resource scheduling system.
 git clone https://github.com/Strawberry019/Tango-Fe.git
 
 # enter the project directory
-cd vue-admin-template
+cd Tango-Fe
 
 # install dependency
 npm install
