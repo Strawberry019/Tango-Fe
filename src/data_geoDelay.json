@@ -1,0 +1,22 @@
+[
+    {"delay_info_id": "804", "network_node_id": "175", "geographic_place_id": "305", "geographic_place_name": "\u676d\u5dde", "node_to_geo_place_delay": 88},
+    {"delay_info_id": "443", "network_node_id": "276", "geographic_place_id": "967", "geographic_place_name": "\u676d\u5dde", "node_to_geo_place_delay": 499},
+    {"delay_info_id": "209", "network_node_id": "782", "geographic_place_id": "617", "geographic_place_name": "\u5e7f\u5dde", "node_to_geo_place_delay": 262},
+    {"delay_info_id": "393", "network_node_id": "584", "geographic_place_id": "713", "geographic_place_name": "\u5317\u4eac", "node_to_geo_place_delay": 369},
+    {"delay_info_id": "955", "network_node_id": "713", "geographic_place_id": "721", "geographic_place_name": "\u6df1\u5733", "node_to_geo_place_delay": 331},
+    {"delay_info_id": "770", "network_node_id": "289", "geographic_place_id": "179", "geographic_place_name": "\u5929\u6d25", "node_to_geo_place_delay": 263},
+    {"delay_info_id": "259", "network_node_id": "798", "geographic_place_id": "133", "geographic_place_name": "\u676d\u5dde", "node_to_geo_place_delay": 204},
+    {"delay_info_id": "742", "network_node_id": "799", "geographic_place_id": "467", "geographic_place_name": "\u6210\u90fd", "node_to_geo_place_delay": 132},
+    {"delay_info_id": "763", "network_node_id": "474", "geographic_place_id": "208", "geographic_place_name": "\u4e0a\u6d77", "node_to_geo_place_delay": 122},
+    {"delay_info_id": "260", "network_node_id": "638", "geographic_place_id": "655", "geographic_place_name": "\u5e7f\u5dde", "node_to_geo_place_delay": 130},
+    {"delay_info_id": "151", "network_node_id": "723", "geographic_place_id": "348", "geographic_place_name": "\u91cd\u5e86", "node_to_geo_place_delay": 418},
+    {"delay_info_id": "506", "network_node_id": "377", "geographic_place_id": "721", "geographic_place_name": "\u5317\u4eac", "node_to_geo_place_delay": 308},
+    {"delay_info_id": "858", "network_node_id": "723", "geographic_place_id": "258", "geographic_place_name": "\u6210\u90fd", "node_to_geo_place_delay": 234},
+    {"delay_info_id": "300", "network_node_id": "414", "geographic_place_id": "882", "geographic_place_name": "\u6df1\u5733", "node_to_geo_place_delay": 81},
+    {"delay_info_id": "711", "network_node_id": "453", "geographic_place_id": "573", "geographic_place_name": "\u91cd\u5e86", "node_to_geo_place_delay": 140},
+    {"delay_info_id": "384", "network_node_id": "651", "geographic_place_id": "524", "geographic_place_name": "\u5317\u4eac", "node_to_geo_place_delay": 132},
+    {"delay_info_id": "241", "network_node_id": "380", "geographic_place_id": "974", "geographic_place_name": "\u91cd\u5e86", "node_to_geo_place_delay": 456},
+    {"delay_info_id": "700", "network_node_id": "189", "geographic_place_id": "614", "geographic_place_name": "\u676d\u5dde", "node_to_geo_place_delay": 184},
+    {"delay_info_id": "180", "network_node_id": "299", "geographic_place_id": "909", "geographic_place_name": "\u676d\u5dde", "node_to_geo_place_delay": 387},
+    {"delay_info_id": "587", "network_node_id": "944", "geographic_place_id": "749", "geographic_place_name": "\u4e0a\u6d77", "node_to_geo_place_delay": 102}
+]
