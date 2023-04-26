@@ -68,6 +68,20 @@ export const constantRoutes = [
   },
 
   {
+    path: '/table_nodeAll/:id',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'table_nodeAll',
+        component: () => import('@/views/table_nodeAll/index.vue'),
+        meta: { title: '节点详情', icon: 'table'}
+      }
+    ],
+    hidden: true
+  },
+
+  /*{
     path: '/',
     component: Layout,
     redirect:'/geoDelay',
@@ -77,7 +91,7 @@ export const constantRoutes = [
       component: () => import('@/views/table_geoDelay/index'),
       meta: { title: '地理延迟', icon: 'table' }
     }]
-  },
+  },*/
 
   {
     path: '/form',
@@ -104,8 +118,8 @@ export const constantRoutes = [
       }
     ]
   },
-
-  {
+  
+  /*{
     path: '/table_taskSet',
     component: Layout,
     children: [
@@ -116,7 +130,22 @@ export const constantRoutes = [
         meta: { title: '集合详情', icon: 'table' }
       }
     ]
+  },*/
+  {
+    path: '/table_taskSet/:id',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'table_taskSet',
+        component: () => import('@/views/table_taskSet/index.vue'),
+        meta: { title: '集合详情', icon: 'table'}
+      }
+    ],
+    hidden: true
   },
+
+
 /*
   {
     path: '/nested',

@@ -9,7 +9,11 @@
       highlight-current-row
       @sort-change="handleSortChange"
     >
-      <el-table-column align="center" label="节点ID" prop="id" width="95"></el-table-column>
+      <el-table-column align="center" label="节点ID" width="95">
+        <template slot-scope="scope">
+            <router-link :to="'/table_nodeAll/' + scope.row.id+'/index'" class="link">{{scope.row.id}}</router-link>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="节点名称" prop="name"></el-table-column>
       <el-table-column label="总cpu资源/核数" width="120" align="center" prop="cpu" sortable></el-table-column>
       <el-table-column label="总内存资源/GB" width="120" align="center" prop="mem" sortable></el-table-column>
@@ -68,3 +72,9 @@ export default {
   }
 }
 </script>
+  <style scoped>
+    .link {
+  color: blue;
+  text-decoration: underline;
+  }
+  </style>
