@@ -18,14 +18,14 @@
         <el-table-column prop="id" label="任务ID" width="100"></el-table-column>
         <el-table-column prop="task_id" label="在该集合下的ID" width="150"></el-table-column>
         <el-table-column prop="task_set_id" label="所属任务集ID" width="150"></el-table-column>
-        <el-table-column prop="node_id" label="分配节点ID" width="140"></el-table-column>
+        <!--<el-table-column prop="node_id" label="分配节点ID" width="140"></el-table-column>-->
         <el-table-column prop="cpu_dem" label="CPU需求" width="120"></el-table-column>
         <el-table-column prop="mem_dem" label="内存需求" width="120"></el-table-column>
         <el-table-column prop="disk_dem" label="磁盘需求" width="120"></el-table-column>
         <el-table-column prop="delay_constraint" label="延迟约束id" width="140"></el-table-column>
-        <el-table-column prop="image_tag" label="image标签" width="140"></el-table-column>
       </el-table>
     </div>
+    <!--
     <div class="table_taskSet_container">
       <h2>任务间约束</h2>
       <el-table :data="constraintInfo" style="width: 100%">
@@ -37,6 +37,7 @@
         <el-table-column prop="delay" label="延迟值" width="140"></el-table-column>
       </el-table>
     </div>
+    -->
   </div>
 </template>
 
@@ -48,7 +49,7 @@ export default {
     return {
       taskSetInfo: [],
       taskInfo: [],
-      constraintInfo:[]
+      //constraintInfo:[]
     }
   },
   created() {
@@ -56,7 +57,7 @@ export default {
   // 获取列表页传来的id
     let id = this.$route.params.id;
     this.id = id
-    console.log('/scheduling/task_set/+${id}')
+    //console.log('/scheduling/task_set/+${id}')
     this.fetchData()
   },
   methods: {
@@ -67,10 +68,9 @@ export default {
         //this.taskSetInfo = Object.values(response.data);
         // Convert the response.data.task_set object to a dictionary
         this.taskSetInfo = [Object.assign({}, response.data)];
-        this.constraintInfo = response.data.all_inter_task_constraints;
-        
-        console.log(this.taskSetInfo)
-        console.log(this.taskInfo) 
+        //this.constraintInfo = response.data.all_inter_task_constraints;
+        //console.log(this.taskSetInfo)
+        //console.log(this.taskInfo) 
       })
     }
   }

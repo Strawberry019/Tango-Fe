@@ -22,6 +22,22 @@
         </template>
         </el-table-column>
       </el-table>
+
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[20, 50, 100, 200]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+        <span slot="prev" :class="{'is-disabled': currentPage === 1}">
+          <i class="el-icon-arrow-left"></i>
+        </span>
+        <span slot="next" :class="{'is-disabled': currentPage === Math.ceil(total / pageSize)}">
+          <i class="el-icon-arrow-right"></i>
+        </span>
+>     </el-pagination>
     </div>
   </template>
   
@@ -42,7 +58,10 @@
     data() {
       return {
         list: null,
-        listLoading: true
+        listLoading: true,
+        currentPage: 1,
+        pageSize: 20,
+        total: 0
       }
     },
     created() {
@@ -62,12 +81,27 @@
       },
       fetchData() {
         this.listLoading = true
-        getList('/scheduling/task_sets').then(response => {
+        getList('/scheduling/task_sets', {
+          sort_by: 'ctime',
+          order_by: 'asc',
+          page: this.currentPage,
+          page_size: this.pageSize,
+        })
+        .then(response => {
           this.list = response.data.items;
+          this.total= response.data.total;
           console.log(response)
           console.log(this.list)
           this.listLoading = false;
         })
+      },
+      handleSizeChange(val) {
+        this.pageSize = val;
+        this.fetchData();
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.fetchData();
       }
     }
   }

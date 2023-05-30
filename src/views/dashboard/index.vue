@@ -1,7 +1,11 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
-  </div>
+    <div class="dashboard-text">数据可视化</div>
+    
+    <iframe src='./static/resCost_per.html'  scrolling="no"  width="1000" height="500" frameborder="0"></iframe>
+    <iframe src='./static/avgDelay.html'  scrolling="no"  width="1000" height="500" frameborder="0"></iframe>
+    <!--<iframe src='' scrolling="no" width="1000" height="1000" frameborder="0">-->
+    </div>
 </template>
 
 <script>
@@ -9,12 +13,16 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
-}
+  data(){
+    return{
+      src:'',
+    };
+  },
+  mounted(){
+    this.src = '../../../public/resCost_per.html'
+  },
+  
+};
 </script>
 
 <style lang="scss" scoped>

@@ -9,7 +9,7 @@
       highlight-current-row
       @sort-change="handleSortChange"
     >
-      <el-table-column align="center" label="节点ID" width="95">
+    <el-table-column align="center" label="节点ID" width="95" sortable>
         <template slot-scope="scope">
             <router-link :to="'/table_nodeAll/' + scope.row.id+'/index'" class="link">{{scope.row.id}}</router-link>
         </template>
@@ -22,6 +22,22 @@
       <el-table-column label="剩余内存资源/GB" width="130" align="center" prop="mem_rem" sortable></el-table-column>
       <el-table-column label="剩余磁盘资源/GB" width="130" align="center" prop="disk_rem" sortable></el-table-column>
     </el-table>
+
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+      <span slot="prev" :class="{'is-disabled': currentPage === 1}">
+        <i class="el-icon-arrow-left"></i>
+      </span>
+      <span slot="next" :class="{'is-disabled': currentPage === Math.ceil(total / pageSize)}">
+      <i class="el-icon-arrow-right"></i>
+      </span>
+    </el-pagination>
   </div>
 </template>
 
@@ -42,7 +58,10 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      currentPage: 1,
+      pageSize: 20,
+      total: 0
     }
   },
   created() {
@@ -60,21 +79,34 @@ export default {
         }
       });
     },
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.fetchData()
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      this.fetchData()
+    },
     fetchData() {
       this.listLoading = true
-      getList('/could_info/nodes').then(response => {
+      getList('/cloud_info/nodes', {
+        page: this.currentPage,
+        page_size: this.pageSize,
+        sort_by: 'id',
+        order_by: 'asc'
+      }).then(response => {
         this.list = response.data.items;
-        console.log(response)
-        console.log(this.list)
+        this.total = response.data.total;
         this.listLoading = false;
       })
     }
   }
 }
 </script>
-  <style scoped>
-    .link {
-  color: blue;
-  text-decoration: underline;
+
+<style scoped>
+  .link {
+    color: blue;
+    text-decoration: underline;
   }
-  </style>
+</style>

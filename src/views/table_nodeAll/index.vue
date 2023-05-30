@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     fetchData() {
-      getList(`/could_info/node/${this.id}`).then(response => {
+      getList(`/cloud_info/node/${this.id}`).then(response => {
         let delay = response.data.delay;
         let nodeInfo = Object.assign({}, response.data);
         nodeInfo.delay_value = delay[0].delay;

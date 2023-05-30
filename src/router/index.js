@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '管理面板', icon: 'dashboard' }
+      meta: { title: '仪表板', icon: 'dashboard' }
     }]
   },
 
@@ -82,18 +82,6 @@ export const constantRoutes = [
   },
 
   /*{
-    path: '/',
-    component: Layout,
-    redirect:'/geoDelay',
-    children: [{
-      path: 'geoDelay',
-      name: 'geoDelay',
-      component: () => import('@/views/table_geoDelay/index'),
-      meta: { title: '地理延迟', icon: 'table' }
-    }]
-  },*/
-
-  {
     path: '/form',
     component: Layout,
     children: [
@@ -101,7 +89,20 @@ export const constantRoutes = [
         path: 'index',
         name: 'form',
         component: () => import('@/views/form/index'),
-        meta: { title: '提交表单', icon: 'form' }
+        meta: { title: '创建任务', icon: 'form' }
+      }
+    ]
+  },*/
+
+  {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'submitTask',
+        name: 'form',
+        component: () => import('@/views/form/submitTask'),
+        meta: { title: '创建任务', icon: 'form' }
       }
     ]
   },
@@ -119,18 +120,6 @@ export const constantRoutes = [
     ]
   },
   
-  /*{
-    path: '/table_taskSet',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'table_taskSet',
-        component: () => import('@/views/table_taskSet/index'),
-        meta: { title: '集合详情', icon: 'table' }
-      }
-    ]
-  },*/
   {
     path: '/table_taskSet/:id',
     component: Layout,
@@ -206,16 +195,6 @@ export const constantRoutes = [
     ]
   },
 */
-  /*{
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },*/
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
