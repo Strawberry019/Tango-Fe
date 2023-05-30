@@ -1,13 +1,15 @@
 <template>
-  <el-form ref="form" :model="form" label-width="120px">
-    <el-form-item label="任务集id">
+  
+  <el-form ref="form" :model="form" style="margin-left: 20px;">
+    <!--<el-form-item label="任务集id">
       <el-input v-model="form.task_set_id" width="100"></el-input>
-    </el-form-item>
-    <el-form-item label="任务数量">
-      <el-input v-model="form.task_count" width="100"></el-input>
+    </el-form-item>-->
+    <h2>集合基本信息：</h2>
+    <el-form-item label="任务数量" >
+      <el-input v-model="form.task_count" placeholder="输入数字并按回车" @change="updateTaskCount"></el-input>
     </el-form-item>
     <el-form-item label="业务类型">
-      <el-select v-model="form.name" placeholder="请描述业务场景">
+      <el-select v-model="form.name" placeholder="请描述业务场景" style="width: 100%">
         <el-option label="网站搭建/电商平台/应用程序开发" value="Website/E-commerce/App" />
         <el-option label="在线游戏" value="Online Game" />
         <el-option label="数据库" value="Database" />
@@ -17,42 +19,42 @@
       </el-select>
     </el-form-item>
 
-    <el-form-item v-for="(task, index) in form.tasks" :key="index">
-      <el-form-item label="任务id">
+    <el-form-item v-for="(task, index) in form.tasks" :key="index" label-position="left">
+      <h2>任务{{index+1}}：</h2>
+      <!--<el-form-item label="任务id">
         <el-input v-model="task.task_id"></el-input>
-      </el-form-item>
-      <el-form-item label="CPU请求数量">
+      </el-form-item>-->
+      <el-form-item label="CPU请求数量/核数">
         <el-input v-model="task.cpu_dem"></el-input>
       </el-form-item>
-      <el-form-item label="内存请求数量">
+      <el-form-item label="内存请求数量/GB">
         <el-input v-model="task.mem_dem"></el-input>
       </el-form-item>
-      <el-form-item label="磁盘请求数量">
+      <el-form-item label="磁盘请求数量/GB">
         <el-input v-model="task.disk_dem"></el-input>
       </el-form-item>
-      <el-form-item label="延迟限制">
+      <el-form-item label="延迟限制/ms">
         <el-input v-model="task.delay_constraint"></el-input>
       </el-form-item>
     </el-form-item>
 
-    <el-form-item v-for="(interCstr, index) in form.inter_task_constraints" :key="index">
-      <el-form-item label="任务1 ID">
+    <el-form-item v-for="(interCstr, index) in form.inter_task_constraints" :key="index" label-position="left">
+      <h2>任务间约束{{index+1}}：</h2>
+      <el-form-item label="任务A ID">
         <el-input v-model="interCstr.a_task_id"></el-input>
       </el-form-item>
-      <el-form-item label="任务2 ID">
-        <el-input v-model="interCstr.z_task_id" placeholder="注意:任务2 ID > 任务1 ID"></el-input>
+      <el-form-item label="任务B ID">
+        <el-input v-model="interCstr.z_task_id" placeholder="注意:任务B ID > 任务A ID，参照任务的表单标题填写"></el-input>
       </el-form-item>
-      <el-form-item label="任务间带宽限制">
+      <el-form-item label="任务间带宽限制/Gbps">
         <el-input v-model="interCstr.bandwidth"></el-input>
       </el-form-item>
-      <el-form-item label="任务间延迟限制">
+      <el-form-item label="任务间延迟限制/ms">
         <el-input v-model="interCstr.delay"></el-input>
       </el-form-item>
     </el-form-item>
 
-    <el-form-item>
-      <el-button type="primary" @click="addTask">新建任务</el-button>
-    </el-form-item>
+
     <el-form-item>
       <el-button type="primary" @click="addInterTaskConstraint">新建任务间约束</el-button>
     </el-form-item>
@@ -69,7 +71,7 @@ export default {
   data() {
     return {
       form: {
-        task_set_id: '',
+        task_set_id: '0',
         task_count: '',
         name: '',
         tasks: [],
@@ -81,7 +83,7 @@ export default {
   methods: {
     addTask() {
       this.form.tasks.push({
-        task_id: '',
+        task_id: '0',
         cpu_dem: '',
         mem_dem: '',
         disk_dem: '',
@@ -97,6 +99,24 @@ export default {
         delay: ''
       });
     },
+    updateTaskCount() {
+    const newCount = parseInt(this.form.task_count);
+    const oldCount = this.form.tasks.length;
+    if (newCount > oldCount) {
+      for (let i = oldCount; i < newCount; i++) {
+        this.form.tasks.push({
+          task_id: '0',
+          cpu_dem: '',
+          mem_dem: '',
+          disk_dem: '',
+          delay_constraint: '',
+          image_tag: '0'
+        });
+      }
+    } else if (newCount < oldCount) {
+      this.form.tasks.splice(newCount);
+    }
+  },
     submitForm() {
       this.form.task_set_id = parseInt(this.form.task_set_id);
       this.form.task_count = parseInt(this.form.task_count);
@@ -108,8 +128,8 @@ export default {
         task.delay_constraint = parseInt(task.delay_constraint);
       });
       this.form.inter_task_constraints.forEach(interCstr => {
-        interCstr.a_task_id = parseInt(interCstr.a_task_id);
-        interCstr.z_task_id = parseInt(interCstr.z_task_id);
+        interCstr.a_task_id = parseInt(interCstr.a_task_id)-1;
+        interCstr.z_task_id = parseInt(interCstr.z_task_id)-1;
         interCstr.bandwidth = parseInt(interCstr.bandwidth);
         interCstr.delay = parseInt(interCstr.delay);
       });
@@ -125,3 +145,4 @@ export default {
   }
 };
 </script>
+

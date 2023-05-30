@@ -70,7 +70,7 @@ export default {
         this.taskSetInfo = [Object.assign({}, response.data)];
         //this.constraintInfo = response.data.all_inter_task_constraints;
         //console.log(this.taskSetInfo)
-        //console.log(this.taskInfo) 
+        console.log(this.taskInfo) 
       })
     }
   }
