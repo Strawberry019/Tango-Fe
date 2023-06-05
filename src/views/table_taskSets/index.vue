@@ -9,7 +9,7 @@
         highlight-current-row
         @sort-change="handleSortChange"
       >
-        <el-table-column align="center" label="任务集ID" width="95" prop="id"></el-table-column>
+        <el-table-column align="center" label="任务集ID" width="95" prop="id" sortable></el-table-column>
         <el-table-column align="center" label="任务集名称" prop="name"></el-table-column>
         <el-table-column label="任务数量" width="120" align="center" prop="task_count"></el-table-column>
         <el-table-column label="任务集状态" width="120" align="center" prop="state" sortable></el-table-column>
