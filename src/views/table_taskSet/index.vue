@@ -1,5 +1,24 @@
 <template>
-  <div class="table_taskSet">
+  <div>
+  <div class="table_taskSet_buttons">
+      <el-button
+        class="table_taskSet_button"
+        :class="{ 'is-active': activeButton === 'request' }"
+        @click="handleRequestClick"
+        :activeButton="'request'"
+      >
+        请求信息
+      </el-button>
+      <el-button
+        class="table_taskSet_button"
+        :class="{ 'is-active': activeButton === 'schedule' }"
+        @click="handleScheduleClick"
+        :activeButton="'schedule'"
+      >
+        调度结果
+      </el-button>
+    </div>
+  <div class="table_taskSet"> 
     <div class="table_taskSet_container">
       <h2>集合数据</h2>
       <el-table :data="taskSetInfo" style="width: 100%">
@@ -39,6 +58,7 @@
     </div>
     -->
   </div>
+  </div>
 </template>
 
 <script>
@@ -49,15 +69,17 @@ export default {
     return {
       taskSetInfo: [],
       taskInfo: [],
+      activeButton: 'request',
+      id:null
       //constraintInfo:[]
     }
   },
   created() {
   // $route是每一个vue实例都具有的属性，存储路由相关的信息
   // 获取列表页传来的id
-    let id = this.$route.params.id;
-    this.id = id
-    //console.log('/scheduling/task_set/+${id}')
+    let temp = this.$route.params.id;
+    this.id = temp
+    //console.log(this.id)
     this.fetchData()
   },
   methods: {
@@ -72,7 +94,32 @@ export default {
         //console.log(this.taskSetInfo)
         console.log(this.taskInfo) 
       })
+    },
+    handleRequestClick() {
+      this.$router.push(`/table_taskSet/${this.id}/index`);
+    },
+    handleScheduleClick() {
+      this.$router.push(`/result/${this.id}/index`);
     }
   }
-}
+  }
+
 </script>
+<style>
+.table_taskSet_buttons {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.table_taskSet_button {
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.table_taskSet {
+  margin-left: 20px;
+}
+
+</style>

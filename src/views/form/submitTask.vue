@@ -77,7 +77,7 @@ export default {
         tasks: [],
         inter_task_constraints: [],
         start_flag:true
-      }
+      },
     };
   },
   methods: {
@@ -135,12 +135,14 @@ export default {
       });
       console.log({ data: this.form })
       console.log(this.form)
-      postList('/scheduling/task_set',this.form).then(() => {
+      postList('/scheduling/task_set',this.form).then(response => {
         this.$message({
           message: '创建成功',
           type: 'success'
         });
-        location.reload(); 
+        //location.reload(); 
+        //console.log(`/table_taskSet/${response.data.id}/index`)
+        this.$router.push(`/table_taskSet/${response.data.id}/index`);
       });
     }
   }

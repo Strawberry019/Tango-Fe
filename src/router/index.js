@@ -81,19 +81,6 @@ export const constantRoutes = [
     hidden: true
   },
 
-  /*{
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '创建任务', icon: 'form' }
-      }
-    ]
-  },*/
-
   {
     path: '/table_taskSets',
     component: Layout,
@@ -135,7 +122,7 @@ export const constantRoutes = [
   },
 
   {
-    path: '/result',
+    path: '/result/:id',
     component: Layout,
     children: [
       {
@@ -144,7 +131,8 @@ export const constantRoutes = [
         component: () => import('@/views/result/index'),
         meta: { title: '结果查询', icon: 'search' }
       }
-    ]
+    ],
+    hidden: true
   },
   
   // 404 page must be placed at the end !!!
