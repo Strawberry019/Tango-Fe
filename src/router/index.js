@@ -113,9 +113,9 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'submitTask',
+        path: 'index',
         name: 'form',
-        component: () => import('@/views/form/submitTask'),
+        component: () => import('@/views/form/index'),
         meta: { title: '创建任务', icon: 'form' }
       }
     ]

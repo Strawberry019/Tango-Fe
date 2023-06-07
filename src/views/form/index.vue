@@ -1,133 +1,151 @@
 <template>
-  <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="实例名称">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item label="当前所在地">
-        <el-select v-model="form.region" placeholder="请选择用户当前所在地">
-          <el-option label="华东地区" value="shanghai" />
-          <el-option label="华北地区" value="beijing" />
-          <el-option label="西南地区" value="chengdu" />
-          <el-option label="西北地区" value="lanzhou" />
-          <el-option label="海外地区" value="newyork" />
-        </el-select>
-      </el-form-item>
-<!--      <el-form-item label="租用时间">
-        <el-col :span="11">
-          <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" />
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-time-picker v-model="form.date2" type="fixed-time" placeholder="Pick a time" style="width: 100%;" />
-        </el-col>
-      </el-form-item>-->
-      <el-form-item label="自动选择地区">
-        <el-switch v-model="form.autoDelivery" />
-      </el-form-item>
-      <el-form-item label="服务器部署区域">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="华东地区" name="type" />
-          <el-checkbox label="华北地区" name="type" />
-          <el-checkbox label="西南地区" name="type" />
-          <el-checkbox label="西北地区" name="type" />
-          <el-checkbox label="海外地区" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="租用时长">
-        <el-radio-group v-model="form.duration">
-          <el-radio label="1月" />
-          <el-radio label="3月" />
-          <el-radio label="半年" />
-          <el-radio label="1年" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="自动续费">
-        <el-switch v-model="form.renew" />
-      </el-form-item>
-      <el-form-item label="套餐规格">
-        <el-radio-group v-model="form.combination">
-          <el-radio label="32元/月" :value="1" />
-          <el-radio label="64元/月" :value="2" />
-          <el-radio label="80元/月" :value="3" />
-
-        </el-radio-group>
-
-      
   
-      </el-form-item>
-      <el-form-item label="服务器描述">
-        <el-input v-model="form.desc" type="textarea" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm">创建</el-button>
-      </el-form-item>
-        <el-checkbox v-model="form.permission">我已阅读并同意《云服务协议》、《退款规则》</el-checkbox>
-      <el-form-item>
+  <el-form ref="form" :model="form" style="margin-left: 20px;">
+    <!--<el-form-item label="任务集id">
+      <el-input v-model="form.task_set_id" width="100"></el-input>
+    </el-form-item>-->
+    <h2>集合基本信息：</h2>
+    <el-form-item label="任务数量" >
+      <el-input v-model="form.task_count" placeholder="输入数字并按回车" @change="updateTaskCount"></el-input>
+    </el-form-item>
+    <el-form-item label="业务类型">
+      <el-select v-model="form.name" placeholder="请描述业务场景" style="width: 100%">
+        <el-option label="网站搭建/电商平台/应用程序开发" value="Website/E-commerce/App" />
+        <el-option label="在线游戏" value="Online Game" />
+        <el-option label="数据库" value="Database" />
+        <el-option label="大数据" value="Big Data" />
+        <el-option label="机器学习" value="Machine Learning" />
+        <el-option label="图像渲染" value="Graphics Rendering" />
+      </el-select>
+    </el-form-item>
 
+    <el-form-item v-for="(task, index) in form.tasks" :key="index" label-position="left">
+      <h2>任务{{index+1}}：</h2>
+      <!--<el-form-item label="任务id">
+        <el-input v-model="task.task_id"></el-input>
+      </el-form-item>-->
+      <el-form-item label="CPU请求数量/核数">
+        <el-input v-model="task.cpu_dem"></el-input>
       </el-form-item>
-    </el-form>
-  </div>
+      <el-form-item label="内存请求数量/GB">
+        <el-input v-model="task.mem_dem"></el-input>
+      </el-form-item>
+      <el-form-item label="磁盘请求数量/GB">
+        <el-input v-model="task.disk_dem"></el-input>
+      </el-form-item>
+      <el-form-item label="延迟限制/ms">
+        <el-input v-model="task.delay_constraint"></el-input>
+      </el-form-item>
+    </el-form-item>
+
+    <el-form-item v-for="(interCstr, index) in form.inter_task_constraints" :key="index" label-position="left">
+      <h2>任务间约束{{index+1}}：</h2>
+      <el-form-item label="任务A ID">
+        <el-input v-model="interCstr.a_task_id"></el-input>
+      </el-form-item>
+      <el-form-item label="任务B ID">
+        <el-input v-model="interCstr.z_task_id" placeholder="注意:任务B ID > 任务A ID，参照任务的表单标题填写"></el-input>
+      </el-form-item>
+      <el-form-item label="任务间带宽限制/Gbps">
+        <el-input v-model="interCstr.bandwidth"></el-input>
+      </el-form-item>
+      <el-form-item label="任务间延迟限制/ms">
+        <el-input v-model="interCstr.delay"></el-input>
+      </el-form-item>
+    </el-form-item>
+
+
+    <el-form-item>
+      <el-button type="primary" @click="addInterTaskConstraint">新建任务间约束</el-button>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm">创建完成</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script>
+import { postList } from '@/api/table'
+
 export default {
   data() {
     return {
       form: {
+        task_set_id: '0',
+        task_count: '',
         name: '',
-        region: '',
-        /*date1: '',
-        date2: '',*/
-        autoDelivery: true,
-        type: [],
-        duration: '',
-        renew:false,
-        combination:'',
-        desc: '',
-        permission:false
-      }
-    }
+        tasks: [],
+        inter_task_constraints: [],
+        start_flag:true
+      },
+    };
   },
   methods: {
-    validateForm() {
-      const requiredFields = ['name', 'region','autoDelivery','type','duration','renew','combination','permission']; // 在此处添加任何其他必填字段
-      const emptyFields = requiredFields.filter(field => !this.form[field]);
-      if (emptyFields.length > 0) {
-        this.$message.error('有必填项未完成！');
-        return false;
-      }
-      return true;
+    addTask() {
+      this.form.tasks.push({
+        task_id: '0',
+        cpu_dem: '',
+        mem_dem: '',
+        disk_dem: '',
+        delay_constraint: '',
+        image_tag:'0'
+      });
     },
+    addInterTaskConstraint() {
+      this.form.inter_task_constraints.push({
+        a_task_id: '',
+        z_task_id: '',
+        bandwidth: '',
+        delay: ''
+      });
+    },
+    updateTaskCount() {
+    const newCount = parseInt(this.form.task_count);
+    const oldCount = this.form.tasks.length;
+    if (newCount > oldCount) {
+      for (let i = oldCount; i < newCount; i++) {
+        this.form.tasks.push({
+          task_id: '0',
+          cpu_dem: '',
+          mem_dem: '',
+          disk_dem: '',
+          delay_constraint: '',
+          image_tag: '0'
+        });
+      }
+    } else if (newCount < oldCount) {
+      this.form.tasks.splice(newCount);
+    }
+  },
     submitForm() {
-      if (this.validateForm()) {
-        if(this.form.permission){
-          this.$message({
-            message: '表单已提交！',
-            type: 'success'
-          });
-          this.form = {
-            name: '',
-            region: '',
-            /*date1: '',
-            date2: '',*/
-            autoDelivery: true,
-            type: [],
-            duration: '',
-            renew:false,
-            combination:'',
-            desc: '',
-            permission:false
-          };  
-        }else{
-          this.$message({
-            message: '请阅读并确认同意服务协议！',
-            type: 'warning'
-          });
-        }
-      }   
+      this.form.task_set_id = parseInt(this.form.task_set_id);
+      this.form.task_count = parseInt(this.form.task_count);
+      this.form.tasks.forEach(task => {
+        task.task_id = parseInt(task.task_id);
+        task.cpu_dem = parseInt(task.cpu_dem);
+        task.mem_dem = parseInt(task.mem_dem);
+        task.disk_dem = parseInt(task.disk_dem);
+        task.delay_constraint = parseInt(task.delay_constraint);
+      });
+      this.form.inter_task_constraints.forEach(interCstr => {
+        interCstr.a_task_id = parseInt(interCstr.a_task_id)-1;
+        interCstr.z_task_id = parseInt(interCstr.z_task_id)-1;
+        interCstr.bandwidth = parseInt(interCstr.bandwidth);
+        interCstr.delay = parseInt(interCstr.delay);
+      });
+      console.log({ data: this.form })
+      console.log(this.form)
+      postList('/scheduling/task_set',this.form).then(response => {
+        this.$message({
+          message: '创建成功',
+          type: 'success'
+        });
+        //location.reload(); 
+        //console.log(`/table_taskSet/${response.data.id}/index`)
+        this.$router.push(`/table_taskSet/${response.data.id}/index`);
+      });
     }
   }
-}
+};
 </script>
-<!--因为是之前写的表单，数据格式还和api上不匹配，暂时还没有写post-->
+

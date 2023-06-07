@@ -75,11 +75,9 @@ export default {
       },
       handleRequestClick() {
         this.$router.push(`/table_taskSet/${this.taskSetId}/index`);
-        console.log("死绝了")
       },
       handleScheduleClick() {
         this.$router.push(`/result/${this.taskSetId}/index`);
-        console.log("活着，只是没有响应")
     }
     },
 };
