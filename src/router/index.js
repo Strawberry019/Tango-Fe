@@ -56,25 +56,24 @@ export const constantRoutes = [
   },
 
   {
-    path: '/',
+    path: '/list_node',
     component: Layout,
-    redirect:'/nodeResource',
     children: [{
-      path: 'nodeResource',
-      name: 'nodeResource',
-      component: () => import('@/views/table_nodeRes/index'),
+      path: 'index',
+      name: 'list_node',
+      component: () => import('@/views/list_node/index'),
       meta: { title: '节点资源', icon: 'table' }
     }]
   },
 
   {
-    path: '/table_nodeAll/:id',
+    path: '/detail_node/:id',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'table_nodeAll',
-        component: () => import('@/views/table_nodeAll/index.vue'),
+        name: 'detail_node',
+        component: () => import('@/views/detail_node/index.vue'),
         meta: { title: '节点详情', icon: 'table'}
       }
     ],
@@ -82,26 +81,26 @@ export const constantRoutes = [
   },
 
   {
-    path: '/table_taskSets',
+    path: '/list_taskSets',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'taskSets',
-        component: () => import('@/views/table_taskSets/index'),
+        name: 'list_taskSets',
+        component: () => import('@/views/list_taskSets/index'),
         meta: { title: '任务集合', icon: 'table' }
       }
     ]
   },
   
   {
-    path: '/table_taskSet/:id',
+    path: '/detail_taskSet/:id',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'table_taskSet',
-        component: () => import('@/views/table_taskSet/index.vue'),
+        name: 'detail_taskSet',
+        component: () => import('@/views/detail_taskSet/index.vue'),
         meta: { title: '集合详情', icon: 'table'}
       }
     ],

@@ -5,7 +5,8 @@ export function getList(s_url,query) {
     url: url,
     method: 'get',
     params: query,
-    baseURL: 'http://127.0.0.1:8000/api/'
+    //baseURL: 'http://127.0.0.1:8000/api/'
+    baseURL: 'http://49.235.99.6:8000/api/'
   })
 }
 export function postList(s_url,form) {
@@ -14,7 +15,8 @@ export function postList(s_url,form) {
     url: url,
     method: 'post',
     data: form,
-    baseURL: 'http://127.0.0.1:8000/api/'
+    //baseURL: 'http://127.0.0.1:8000/api/'
+    baseURL: 'http://49.235.99.6:8000/api/'
   })
 }
 

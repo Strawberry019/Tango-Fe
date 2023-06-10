@@ -59,7 +59,6 @@ export default {
     };
   },
   created() {
-    //this.taskSetId = 1240
     this.taskSetId = this.$route.params.id;
     this.fetchData()
   },
@@ -74,7 +73,7 @@ export default {
         });
       },
       handleRequestClick() {
-        this.$router.push(`/table_taskSet/${this.taskSetId}/index`);
+        this.$router.push(`/detail_taskSet/${this.taskSetId}/index`);
       },
       handleScheduleClick() {
         this.$router.push(`/result/${this.taskSetId}/index`);

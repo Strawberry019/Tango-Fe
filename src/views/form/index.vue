@@ -74,23 +74,26 @@ export default {
         task_set_id: '0',
         task_count: '',
         name: '',
-        tasks: [],
+        tasks: [{
+          task_id:0
+        }],
         inter_task_constraints: [],
         start_flag:true
       },
     };
   },
   methods: {
-    addTask() {
+    /*addTask() {
+      //this.form.tasks.task_id++;
       this.form.tasks.push({
-        task_id: '0',
+        task_id: '',
         cpu_dem: '',
         mem_dem: '',
         disk_dem: '',
         delay_constraint: '',
         image_tag:'0'
       });
-    },
+    },*/
     addInterTaskConstraint() {
       this.form.inter_task_constraints.push({
         a_task_id: '',
@@ -104,8 +107,9 @@ export default {
     const oldCount = this.form.tasks.length;
     if (newCount > oldCount) {
       for (let i = oldCount; i < newCount; i++) {
+        const task_id = i;
         this.form.tasks.push({
-          task_id: '0',
+          task_id: task_id,
           cpu_dem: '',
           mem_dem: '',
           disk_dem: '',
@@ -141,8 +145,7 @@ export default {
           type: 'success'
         });
         //location.reload(); 
-        //console.log(`/table_taskSet/${response.data.id}/index`)
-        this.$router.push(`/table_taskSet/${response.data.id}/index`);
+        this.$router.push(`/detail_taskSet/${response.data.id}/index`);
       });
     }
   }

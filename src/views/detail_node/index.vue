@@ -22,12 +22,6 @@ export default {
   data() {
     return {
       nodeInfo: [],
-      /*写法1：
-      delayColumn:[
-        { prop: 'geo_place_id', label: '地理位置ID', width: '120' },
-        { prop: 'delay', label: '延迟值', width: '120' } 
-      ]
-      */
     }
   },
   created() {
